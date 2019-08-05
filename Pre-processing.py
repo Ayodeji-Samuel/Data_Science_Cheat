@@ -29,6 +29,11 @@ data = pd.get_dummies(data)
 dummy = pd.get_dummies(data['Variable1'])
 data = pd.concat([data, dummy], axis=1)
 data.drop(['Variable1'], axis=1)
+#4.3. Heat mapping of correlation Numerical variable or feature
+correlation_matrix = data.corr()
+fig = plt.figure(figsize=(12,9))
+sns.heatmap(correlation_matrix,vmax=0.8,square = True)
+plt.show()
 
 
 #5. Splitting the data-set into Training and Test set
@@ -41,7 +46,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 
 #6. Feature Scaling
+#6.1. Plot the distribution of all the continuous variables in the data set for feature scaling
+X_train[X_train.dtypes[(X_train.dtypes=="float64")|(X_train.dtypes=="int64")].index.values].hist(figsize=[11,11])
+
 ### Feature scaling is the method to limit the range of variables so that they can be compared on common grounds.
+### It is performed on continuous variables.
 from sklearn.preprocessing import StandardScaler
 standard_X = StandardScaler()
 
