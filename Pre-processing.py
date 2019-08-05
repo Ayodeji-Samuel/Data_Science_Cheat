@@ -17,7 +17,9 @@ data.columns
 
 #3. Check out the missing values
 data.isnull().sum()
-#3.1. Handling missing values
+#3.1. Only view columns with missing data
+data.columns[data.isnull().any()]
+#3.2. Handling missing values
 data.dropna(inplace=True)
 
 
